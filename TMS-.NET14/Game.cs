@@ -52,9 +52,32 @@ namespace TMS_.NET14
         {
             _currentAttempt++;
 
-            NumberThatIsGuessed =
-                InputNumber($"Attempt: {_currentAttempt}/{Rules.AttemptsCountBeforeLosing}. " +
-                            $"Guess the number btw [{Rules.Min}, {Rules.Max}]: "); // swap
+            do
+            {
+                NumberThatIsGuessed =
+               InputNumber($"Attempt: {_currentAttempt}/{Rules.AttemptsCountBeforeLosing}. " +
+                           $"Guess the number btw [{Rules.Min}, {Rules.Max}]: "); // swap
+
+                if (Rules.IsUserAnIdiot(NumberThatIsGuessed, _usersAttempts))
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("U've already mentioned this number. Choose another one.\n");
+                    Console.ResetColor();
+                    continue;
+                }
+
+                if (Rules.IsUserTryANumberOutOfBounds(NumberThatIsGuessed, Rules.Min, Rules.Max))
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("U can not input a number out of bounds. Choose another one.\n");
+                    Console.ResetColor();
+                    continue;
+                }
+
+                break;
+            }
+            while ((Rules.IsUserAnIdiot(NumberThatIsGuessed, _usersAttempts))
+                   || (Rules.IsUserTryANumberOutOfBounds(NumberThatIsGuessed, Rules.Min, Rules.Max)));
 
             _usersAttempts.Add(NumberThatIsGuessed);
 
@@ -137,6 +160,7 @@ namespace TMS_.NET14
 
         private void CheckOnTheGameResult()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(NumberThatIsGuessed == Rules.NumberPuzzle
                 ? "Сongrats! UR a winner!"
                 : $"UR a looser :(. U've used more than {Rules.AttemptsCountBeforeLosing} available attempts. The answer was: {Rules.NumberPuzzle}");
@@ -149,6 +173,7 @@ namespace TMS_.NET14
             }
 
             Console.WriteLine(finalResult.ToString()[..(finalResult.ToString().Length - 2)]);
+            Console.ResetColor();
         }
     }
 }

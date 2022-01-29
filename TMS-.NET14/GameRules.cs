@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TMS_.NET14
 {
@@ -45,6 +46,21 @@ namespace TMS_.NET14
             }
 
             return number;
+        }
+
+        public bool IsUserAnIdiot(int userInputNumber, List<int> usersPreviosAttempts)
+        {
+            return usersPreviosAttempts.Contains(userInputNumber);
+        }
+
+        public bool IsUserTryANumberOutOfBounds(int userInputNumber, int min, int max)
+        {
+            if (userInputNumber < min || userInputNumber>max)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
