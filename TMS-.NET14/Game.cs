@@ -8,15 +8,13 @@ namespace TMS_.NET14
     {
         private GameRules Rules { get; set; }
         private readonly List<int> _usersAttempts = new();
-        private int CurrentAttempt { get; set; }
+        private int CurrentAttempt { get; set; } = 1;
         private int NumberThatIsGuessed { get; set; }
 
         public void FirstPlayer()
         {
-            // First player
             Greeting("first", new User());
-
-
+            
             int min = InputNumber("Input MIN number: ");
             int max = InputNumber("Input MAX number: ");
             int numberPuzzle = InputNumber("Input a number number to guess: ");
@@ -33,19 +31,13 @@ namespace TMS_.NET14
             };
 
             Rules.CheckNumberPuzzle(Rules.Min, Rules.Max, Rules.NumberPuzzle);
-
-
-
+            
             Console.Clear();
         }
 
         public void SecondPlayer()
         {
             Greeting("second", new User());
-
-            //
-            Console.WriteLine($"OUR NUM is {Rules.NumberPuzzle}");
-            //
 
             do
             {
@@ -58,31 +50,26 @@ namespace TMS_.NET14
 
         private void SecondPlayerTryToGuess()
         {
-
             NumberThatIsGuessed =
                 InputNumber($"Attempt: {CurrentAttempt}/{Rules.AttemptsCountBeforeLosing}. " +
                             $"Guess the number btw [{Rules.Min}, {Rules.Max}]: "); // swap
 
             _usersAttempts.Add(NumberThatIsGuessed);
 
-            Console.WriteLine((Rules.NumberPuzzle > NumberThatIsGuessed) ? "\u2191" : "\u2193");
-
-            CurrentAttempt++;
-        }
-
-        private void CheckOnTheGameResult()
-        {
-            Console.WriteLine(NumberThatIsGuessed == Rules.NumberPuzzle
-                ? "Сongrats! UR a winner!"
-                : $"UR a looser :(\n. U've used more than {Rules.AttemptsCountBeforeLosing}.");
-
-            StringBuilder finalResult = new();
-            foreach (int shot in _usersAttempts)
+            if (Rules.NumberPuzzle > NumberThatIsGuessed) // 1 - 10 (5) => 7
             {
-                finalResult.Append(shot + ", ");
+                Console.WriteLine($"\u2191"); // need more
+                Rules.Min = NumberThatIsGuessed++;
+                NumberThatIsGuessed--;
+            }
+            else if (Rules.NumberPuzzle < NumberThatIsGuessed)
+            {
+                Console.WriteLine("\u2193"); // need less
+                Rules.Max = NumberThatIsGuessed--;
+                NumberThatIsGuessed++;
             }
 
-            Console.WriteLine(finalResult.ToString()[..(finalResult.ToString().Length - 2)]);
+            CurrentAttempt++;
         }
 
         private void Greeting(string player, User user)
@@ -146,6 +133,22 @@ namespace TMS_.NET14
             }
 
             return availableAttempts;
+        }
+
+        private void CheckOnTheGameResult()
+        {
+            Console.WriteLine(NumberThatIsGuessed == Rules.NumberPuzzle
+                ? "Сongrats! UR a winner!"
+                : $"UR a looser :(\n. U've used more than {Rules.AttemptsCountBeforeLosing}.");
+
+            StringBuilder finalResult = new();
+
+            foreach (int shot in _usersAttempts)
+            {
+                finalResult.Append(shot + ", ");
+            }
+
+            Console.WriteLine(finalResult.ToString()[..(finalResult.ToString().Length - 2)]);
         }
     }
 }
