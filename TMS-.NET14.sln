@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS-.NET14", "TMS-.NET14\TMS-.NET14.csproj", "{F9AE07A6-53F2-480C-8EFE-749FE9AEB3BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS-.NET14", "TMS-.NET14\TMS-.NET14.csproj", "{F9AE07A6-53F2-480C-8EFE-749FE9AEB3BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{1F702C11-58C6-4B8A-A0AE-BAA8FF509082}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brackets", "Brackets\Brackets.csproj", "{9EF24636-590A-42F9-A97C-2FB181FBA17D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{F9AE07A6-53F2-480C-8EFE-749FE9AEB3BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9AE07A6-53F2-480C-8EFE-749FE9AEB3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9AE07A6-53F2-480C-8EFE-749FE9AEB3BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F702C11-58C6-4B8A-A0AE-BAA8FF509082}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F702C11-58C6-4B8A-A0AE-BAA8FF509082}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F702C11-58C6-4B8A-A0AE-BAA8FF509082}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F702C11-58C6-4B8A-A0AE-BAA8FF509082}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EF24636-590A-42F9-A97C-2FB181FBA17D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EF24636-590A-42F9-A97C-2FB181FBA17D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EF24636-590A-42F9-A97C-2FB181FBA17D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EF24636-590A-42F9-A97C-2FB181FBA17D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

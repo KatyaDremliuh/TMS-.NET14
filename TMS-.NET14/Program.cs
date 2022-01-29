@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TMS_.NET14
+﻿namespace TMS_.NET14
 {
     class Program
     {
@@ -9,10 +7,6 @@ namespace TMS_.NET14
             Game game = new();
             game.FirstPlayer();
             game.SecondPlayer();
-
-            //Calculator calculator = new Calculator();
-            //calculator.GetSourceData();
-            //calculator.Calculate('+');
         }
     }
 }
