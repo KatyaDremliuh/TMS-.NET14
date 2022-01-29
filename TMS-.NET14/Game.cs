@@ -15,8 +15,8 @@ namespace TMS_.NET14
         {
             // First player
             Greeting("first", new User());
-       
-            
+
+
             int min = InputNumber("Input MIN number: ");
             int max = InputNumber("Input MAX number: ");
             int numberPuzzle = InputNumber("Input a number number to guess: ");
@@ -32,12 +32,20 @@ namespace TMS_.NET14
                 AttemptsCountBeforeLosing = attemptsCountBeforeLosing
             };
 
+            Rules.CheckNumberPuzzle(Rules.Min, Rules.Max, Rules.NumberPuzzle);
+
+
+
             Console.Clear();
         }
 
         public void SecondPlayer()
         {
             Greeting("second", new User());
+
+            //
+            Console.WriteLine($"OUR NUM is {Rules.NumberPuzzle}");
+            //
 
             do
             {
