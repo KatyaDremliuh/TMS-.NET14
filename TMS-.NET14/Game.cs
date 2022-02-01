@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace TMS_.NET14
 {
     class Game
     {
-        private GameRules Rules { get; set; }
+        private GameRules _rules = new();
         private readonly List<int> _usersAttempts = new();
         private int _currentAttempt;
         private int NumberThatIsGuessed { get; set; }
@@ -15,14 +14,14 @@ namespace TMS_.NET14
         {
             Greeting("first", new User());
 
-            int min = InputNumber("Input MIN number: ");
-            int max = InputNumber("Input MAX number: ");
-            int numberPuzzle = InputNumber("Input a number number to guess: ");
+            int min = _rules.InputValidNumber("Input MIN number: ");
+            int max = _rules.InputValidNumber("Input MAX number: ");
+            int numberPuzzle = _rules.InputValidNumber("Input a number number to guess: ");
 
             SwapMinMax(min, max, out int newMin, out int newMax);
             int attemptsCountBeforeLosing = CalculateAttemptsCount(newMin, newMax);
 
-            Rules = new GameRules()
+            _rules = new GameRules()
             {
                 Min = newMin,
                 Max = newMax,
@@ -30,7 +29,7 @@ namespace TMS_.NET14
                 AttemptsCountBeforeLosing = attemptsCountBeforeLosing
             };
 
-            Rules.CheckNumberPuzzle(Rules.Min, Rules.Max, Rules.NumberPuzzle);
+            _rules.CheckNumberPuzzle(_rules.Min, _rules.Max, _rules.NumberPuzzle);
 
             Console.Clear();
         }
@@ -43,7 +42,7 @@ namespace TMS_.NET14
             {
                 SecondPlayerTryToGuess();
             }
-            while ((NumberThatIsGuessed != Rules.NumberPuzzle) && (_currentAttempt != Rules.AttemptsCountBeforeLosing));
+            while ((NumberThatIsGuessed != _rules.NumberPuzzle) && (_currentAttempt != _rules.AttemptsCountBeforeLosing));
 
             CheckOnTheGameResult();
         }
@@ -55,10 +54,10 @@ namespace TMS_.NET14
             do
             {
                 NumberThatIsGuessed =
-               InputNumber($"Attempt: {_currentAttempt}/{Rules.AttemptsCountBeforeLosing}. " +
-                           $"Guess the number btw [{Rules.Min}, {Rules.Max}]: "); // swap
+              _rules.InputValidNumber($"Attempt: {_currentAttempt}/{_rules.AttemptsCountBeforeLosing}. " +
+                           $"Guess the number btw [{_rules.Min}, {_rules.Max}]: "); // swap
 
-                if (Rules.IsUserAnIdiot(NumberThatIsGuessed, _usersAttempts))
+                if (_rules.IsUserAnIdiot(NumberThatIsGuessed, _usersAttempts))
                 {
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("U've already mentioned this number. Choose another one.\n");
@@ -66,7 +65,7 @@ namespace TMS_.NET14
                     continue;
                 }
 
-                if (Rules.IsUserTryANumberOutOfBounds(NumberThatIsGuessed, Rules.Min, Rules.Max))
+                if (_rules.IsUserTryANumberOutOfBounds(NumberThatIsGuessed, _rules.Min, _rules.Max))
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("U can not input a number out of bounds. Choose another one.\n");
@@ -76,21 +75,21 @@ namespace TMS_.NET14
 
                 break;
             }
-            while ((Rules.IsUserAnIdiot(NumberThatIsGuessed, _usersAttempts))
-                   || (Rules.IsUserTryANumberOutOfBounds(NumberThatIsGuessed, Rules.Min, Rules.Max)));
+            while ((_rules.IsUserAnIdiot(NumberThatIsGuessed, _usersAttempts))
+                   || (_rules.IsUserTryANumberOutOfBounds(NumberThatIsGuessed, _rules.Min, _rules.Max)));
 
             _usersAttempts.Add(NumberThatIsGuessed);
 
-            if (Rules.NumberPuzzle > NumberThatIsGuessed) // 1 - 10 (5) => 7
+            if (_rules.NumberPuzzle > NumberThatIsGuessed) // 1 - 10 (5) => 7
             {
                 Console.WriteLine("\u2191"); // need more
-                Rules.Min = NumberThatIsGuessed++;
+                _rules.Min = NumberThatIsGuessed++;
                 NumberThatIsGuessed--;
             }
-            else if (Rules.NumberPuzzle < NumberThatIsGuessed)
+            else if (_rules.NumberPuzzle < NumberThatIsGuessed)
             {
                 Console.WriteLine("\u2193"); // need less
-                Rules.Max = NumberThatIsGuessed--;
+                _rules.Max = NumberThatIsGuessed--;
                 NumberThatIsGuessed++;
             }
         }
@@ -100,33 +99,6 @@ namespace TMS_.NET14
             Console.Write($"Input Ur name, {player} player: ");
             user.Name = Console.ReadLine();
             Console.WriteLine($"Hi, {user.Name}");
-        }
-
-        private int InputNumber(string message)
-        {
-            Console.Write(message);
-            int number = 0;
-
-            while (true)
-            {
-                try
-                {
-                    string numberString = Console.ReadLine();
-
-                    if (numberString != null)
-                    {
-                        number = int.Parse(numberString);
-                    }
-
-                    break;
-                }
-                catch (Exception)
-                {
-                    Console.Write("Try again. Input only a number: ");
-                }
-            }
-
-            return number;
         }
 
         private void SwapMinMax(int min, int max, out int newMin, out int newMax)
@@ -161,18 +133,15 @@ namespace TMS_.NET14
         private void CheckOnTheGameResult()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(NumberThatIsGuessed == Rules.NumberPuzzle
+            Console.WriteLine(NumberThatIsGuessed == _rules.NumberPuzzle
                 ? "Сongrats! UR a winner!"
-                : $"UR a looser :(. U've used more than {Rules.AttemptsCountBeforeLosing} available attempts. The answer was: {Rules.NumberPuzzle}");
-
-            StringBuilder finalResult = new();
+                : $"UR a looser :(. U've used more than {_rules.AttemptsCountBeforeLosing} available attempts. The answer was: {_rules.NumberPuzzle}");
 
             foreach (int shot in _usersAttempts)
             {
-                finalResult.Append(shot + ", ");
+                Console.Write(new string(string.Join(',', shot)));
             }
 
-            Console.WriteLine(finalResult.ToString()[..(finalResult.ToString().Length - 2)]);
             Console.ResetColor();
         }
     }

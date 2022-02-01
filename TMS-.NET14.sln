@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator\Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brackets", "Brackets\Brackets.csproj", "{9EF24636-590A-42F9-A97C-2FB181FBA17D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calc2", "Calc2\Calc2.csproj", "{8A63949C-E5D2-4D7D-836F-35D413018A06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calc2", "Calc2\Calc2.csproj", "{8A63949C-E5D2-4D7D-836F-35D413018A06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameNonsence", "GameNonsence\GameNonsence.csproj", "{AF7268F7-7E1B-4F17-9D98-A96918FA5A2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameNonsence", "GameNonsence\GameNonsence.csproj", "{AF7268F7-7E1B-4F17-9D98-A96918FA5A2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maze", "Maze\Maze.csproj", "{842802F2-4975-4FA4-80D9-1142E940B4A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{AF7268F7-7E1B-4F17-9D98-A96918FA5A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF7268F7-7E1B-4F17-9D98-A96918FA5A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF7268F7-7E1B-4F17-9D98-A96918FA5A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{842802F2-4975-4FA4-80D9-1142E940B4A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{842802F2-4975-4FA4-80D9-1142E940B4A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{842802F2-4975-4FA4-80D9-1142E940B4A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{842802F2-4975-4FA4-80D9-1142E940B4A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
