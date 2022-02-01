@@ -1,4 +1,6 @@
-﻿namespace TMS_.NET14
+﻿using System;
+
+namespace TMS_.NET14
 {
     class Program
     {

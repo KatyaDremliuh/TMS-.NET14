@@ -15,37 +15,35 @@ namespace TMS_.NET14
             while (numberPuzzle < min || numberPuzzle > max)
             {
                 Console.WriteLine($"Ur mystery number ought to be btw {min} and {max} including.");
-                numberPuzzle = InputValidNumberPuzzle();
+                numberPuzzle = InputValidNumber();
             }
 
             NumberPuzzle = numberPuzzle;
             return NumberPuzzle;
         }
 
-        private int InputValidNumberPuzzle()
+        private int InputValidNumber()
         {
-            int number = 0;
-
-            while (true)
+            int number;
+            do
             {
-                try
+                if (int.TryParse(Console.ReadLine(), out number))
                 {
-                    string numberString = Console.ReadLine();
-
-                    if (numberString != null)
-                    {
-                        number = int.Parse(numberString);
-                    }
-
                     break;
                 }
-                catch (Exception)
-                {
-                    Console.Write("Try again. Input only a number: ");
-                }
+
+                Console.WriteLine("Try again. Input only a number: ");
             }
+            while (true);
 
             return number;
+        }
+
+        public int InputValidNumber(string message)
+        {
+            Console.Write(message);
+
+            return InputValidNumber();
         }
 
         public bool IsUserAnIdiot(int userInputNumber, List<int> usersPreviosAttempts)
@@ -55,7 +53,7 @@ namespace TMS_.NET14
 
         public bool IsUserTryANumberOutOfBounds(int userInputNumber, int min, int max)
         {
-            if (userInputNumber < min || userInputNumber>max)
+            if (userInputNumber < min || userInputNumber > max)
             {
                 return true;
             }
